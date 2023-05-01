@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Document</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" rel="stylesheet">
+    <script src="vueversion3.js"></script>
+    <script src="books.js"></script>
+    <style>
+        .less {
+            color: red;
+        }
+
+        .more {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="main">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+        <a @click.prevent="showBooks()" class="navbar-brand" href="#">
+            Books
+        </a>
+        <a @click.prevent="showWishList()" class="navbar-brand ml-auto" href="#">
+            Wishlist
+        </a>
+    </nav>
+    <div class="row" v-if="showList == false">
+        <div class="col-md-4" v-for="book in books">
+            <div class="card mb-4">
+                <img :src="book.image" :title="book.name" alt="Book cover" class="card-img-top">
+                <div class="card-body row align-items-baseline justify-content-between">
+                    <div class="col-5">
+                        <h5 class="card-title">{{ book.category }}</h5>
+                        <p class="card-text less" v-if="book.pages < 50">{{ book.pages }}</p>
+                        <p class="card-text more" v-else>{{ book.pages }}</p>
+                        <p class="card-text">{{ book.isbn }}</p>
+                    </div>
+                    <div class="col-5">
+                        <h5 class="card-title">{{ book.author }}</h5>
+                        <p class="card-text">{{ formatPrice(book.price) }} </p>
+                        <button :disabled="checkBook(book)" @click="addToList(book)" class="btn btn-primary small">Add
+                            to
+                            WishList
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" v-if="showList == true">
+        <h1 class="less fw-bolder text-center mt-5" v-if="bookList.length === 0">WishList is Empty</h1>
+        <table class="table table-dark" v-else>
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ISBN</th>
+                <th scope="col">Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Image</th>
+                <th scope="col">Number of pages</th>
+                <th scope="col">Author</th>
+                <th scope="col">Price</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr :key="index" v-for="(book, index) in bookList">
+                <th scope="row">{{ index + 1 }}</th>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.name }}</td>
+                <td>{{ book.category }}</td>
+                <td>
+                    <img :alt="book.name" :alt="book.name" :src="book.image" class="img-thumbnail" height="50"
+                         width="50"/>
+                </td>
+                <td>{{ book.pages }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ formatPrice(book.price) }}</td>
+                <td>
+                    <button @click="removeBook(book)" class="btn btn-danger">
+                        Remove
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--Create vue Instance-->
+<script>
+    // 1- create vue instance using method createApp
+    const app = Vue.createApp({
+        data: () => ({
+            books: books,
+            showList: false,
+            bookList: [],
+        })
+        ,
+        methods: {
+            addToList(book) {
+                this.bookList.push(book);
+                console.log(this.bookList);
+            },
+            showWishList() {
+                this.showList = true
+            },
+            showBooks() {
+                this.showList = false
+            },
+            removeBook(book) {
+                this.bookList.splice(book, 1);
+            },
+            checkBook(book) {
+                return this.bookList.find(b => b.isbn === book.isbn)
+            },
+            formatPrice(price) {
+                return Intl.NumberFormat('ar-SA', {
+                    style: 'currency',
+                    currency: 'SAR'
+                }).format(price)
+            }
+        }
+    });
+    //2- mount
+    app.mount('#main');
+</script>
+<script crossorigin="anonymous" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="6">
+            <item index="0" class="java.lang.String" itemvalue="v-cloak" />
+            <item index="1" class="java.lang.String" itemvalue="v-if" />
+            <item index="2" class="java.lang.String" itemvalue="v-model" />
+            <item index="3" class="java.lang.String" itemvalue="true-value" />
+            <item index="4" class="java.lang.String" itemvalue="false-value" />
+            <item index="5" class="java.lang.String" itemvalue="@click.prevent" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+  </profile>
+</component>

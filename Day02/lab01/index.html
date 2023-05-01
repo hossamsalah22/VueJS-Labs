@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Add Post</title>
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+	</head>
+	<body>
+		<div id="app" class="container" v-cloak>
+			<div v-if="!submitted">
+				<h1>New Post</h1>
+
+				<form id="form" class="needs-validation" novalidate>
+					<!-- Post Title -->
+					<div class="form-group">
+						<label for="title">Title:</label>
+						<input type="text" id="title" class="form-control" v-model="post.title" required />
+						<div class="invalid-feedback">Post title is Required</div>
+					</div>
+
+					<!-- Post Description -->
+					<div class="form-group">
+						<label for="description">Description:</label>
+						<textarea id="description" class="form-control" v-model="post.description" required></textarea>
+						<div class="invalid-feedback">Description is Required</div>
+					</div>
+
+					<!-- Post Category -->
+					<div class="form-group">
+						<label for="category">Category:</label>
+						<div class="form-check">
+							<input
+								type="radio"
+								id="category1"
+								name="category"
+								class="form-check-input"
+								v-model="post.category"
+								value="category1"
+								required
+							/>
+							<label for="category1" class="form-check-label">First Cat</label>
+						</div>
+						<div class="form-check">
+							<input type="radio" id="category2" name="category" class="form-check-input" v-model="post.category" value="category2" />
+							<label for="category2" class="form-check-label">Second Cat</label>
+						</div>
+						<div class="form-check">
+							<input type="radio" id="category3" name="category" class="form-check-input" v-model="post.category" value="category3" />
+							<label for="category3" class="form-check-label">Third Cat</label>
+						</div>
+						<div class="invalid-feedback">Select Category Please</div>
+					</div>
+
+					<!-- Post Social Media -->
+					<div class="form-group">
+						<label for="social-media">Social Media:</label>
+						<div class="form-check">
+							<input type="checkbox" id="facebook" class="form-check-input" v-model="post.socialMedia" value="facebook" />
+							<label for="facebook" class="form-check-label">Facebook</label>
+						</div>
+						<div class="form-check">
+							<input type="checkbox" id="twitter" class="form-check-input" v-model="post.socialMedia" value="twitter" />
+							<label for="twitter" class="form-check-label">Twitter</label>
+						</div>
+						<div class="form-check">
+							<input type="checkbox" id="instagram" class="form-check-input" v-model="post.socialMedia" value="instagram" />
+							<label for="instagram" class="form-check-label">Instagram</label>
+						</div>
+					</div>
+
+					<!-- Post Selection -->
+					<div class="form-group">
+						<label for="selection">Selection:</label>
+						<select id="selection" class="form-control" v-model="post.selection" required>
+							<option value="">Please select an option</option>
+							<option value="option1">Option 1</option>
+							<option value="option2">Option 2</option>
+							<option value="option3">Option 3</option>
+						</select>
+						<div class="invalid-feedback">Please select an option.</div>
+					</div>
+
+					<!-- Post Publish -->
+					<div class="form-group form-check">
+						<input
+							type="checkbox"
+							id="publish"
+							class="form-check-input"
+							v-model="post.publishImmediately"
+							true-value="Immediately"
+							false-value="Later"
+						/>
+						<label for="publish" class="form-check-label">Publish immediately</label>
+					</div>
+
+					<!-- Submit Button -->
+					<button @click.prevent="submitForm" class="btn btn-primary form-control">Add</button>
+				</form>
+			</div>
+
+			<div v-if="submitted">
+				<table class="table table-striped table-dark p-5">
+					<tbody class="tbody">
+						<tr>
+							<td>Title:</td>
+							<td class="w-100">{{post.title}}</td>
+						</tr>
+						<tr>
+							<td>Description:</td>
+							<td style="white-space: pre">{{post.description}}</td>
+						</tr>
+						<tr>
+							<td>Category:</td>
+							<td>{{post.category}}</td>
+						</tr>
+						<tr>
+							<td>Social Media:</td>
+							<td>{{post.socialMedia.join(",")}}</td>
+						</tr>
+						<tr>
+							<td>Selection:</td>
+							<td>{{post.selection}}</td>
+						</tr>
+						<tr>
+							<td>Publish:</td>
+							<td>{{post.publishImmediately}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- Vue.js CDN -->
+		<script src="vueversion3.js"></script>
+		<!-- Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+		<script>
+			let app = Vue.createApp({
+				data: () => ({
+					submitted: 0,
+					post: {
+						title: '',
+						description: '',
+						category: '',
+						socialMedia: [],
+						selection: '',
+						publishImmediately: false,
+					},
+				}),
+				methods: {
+					submitForm: function () {
+						if (!form.checkValidity()) {
+							event.preventDefault();
+							event.stopPropagation();
+						} else {
+							this.submitted = 1;
+						}
+
+						form.classList.add('was-validated');
+					},
+				},
+			});
+			app.mount('#app');
+		</script>
+	</body>
+</html>

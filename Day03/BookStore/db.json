@@ -1,0 +1,76 @@
+{
+  "books":[
+    {
+      "ISBN": 9780143111597,
+      "name": "To Kill a Mockingbird",
+      "category": "Fiction",
+      "imageUrl": "https://picsum.photos/id/111/200/300",
+      "numPages": 30,
+      "author": "Harper Lee",
+      "price": 10.99
+  },
+  {
+      "ISBN": 9780800728783,
+      "name": "The Hideaway",
+      "category": "Fiction",
+      "imageUrl": "https://picsum.photos/id/222/200/300",
+      "numPages": 352,
+      "author": "Lauren K. Denton",
+      "price": 9.99
+  },
+  {
+      "ISBN": 9780593139134,
+      "name": "The Midnight Library",
+      "category": "Fiction",
+      "imageUrl": "https://picsum.photos/id/250/200/300",
+      "numPages": 288,
+      "author": "Matt Haig",
+      "price": 14.99
+  },
+  {
+      "ISBN": 9780802148532,
+      "name": "How to Be an Antiracist",
+      "category": "Non-fiction",
+      "imageUrl": "https://picsum.photos/id/160/200/300",
+      "numPages": 44,
+      "author": "Ibram X. Kendi",
+      "price": 13.99
+  },
+  {
+      "ISBN": 9780525539776,
+      "name": "Atomic Habits",
+      "category": "Non-fiction",
+      "imageUrl": "https://picsum.photos/id/240/200/300",
+      "numPages": 320,
+      "author": "James Clear",
+      "price": 18.99
+  },
+  {
+      "ISBN": 9781524763169,
+      "name": "Becoming",
+      "category": "Biography",
+      "imageUrl": "https://picsum.photos/id/237/200/300",
+      "numPages": 448,
+      "author": "Michelle Obama",
+      "price": 19.99
+  }
+],
+
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
